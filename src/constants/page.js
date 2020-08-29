@@ -1,0 +1,3 @@
+export const PAGE_ACTION_TYPES = {
+  ADVANCE_PAGE: 'ADVANCE_PAGE'
+}
