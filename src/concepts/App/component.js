@@ -3,12 +3,9 @@ import React, {useReducer, useRef} from 'react';
 import ImageCard from '../ImageCard';
 
 import { imageReducer, imageInitialState, pageReducer, pageInitialState} from '../../utils' 
-import {useImagesFetch, useInfiniteScroll} from '../../hooks';
+import {useImagesFetch, useInfiniteScroll, useLazyLoading} from '../../hooks';
 
 import '../../index.css';
-
-
-
 
 const  App = ()=> {
 const [imgData, imgDispatch]=useReducer(imageReducer, imageInitialState);
@@ -17,14 +14,15 @@ const bottomBoundaryRef = useRef()
 
 
 useImagesFetch(pageData.page, imgDispatch);
-useInfiniteScroll(bottomBoundaryRef, pageDispatch)
+useInfiniteScroll(bottomBoundaryRef, pageDispatch);
+useLazyLoading('.card-img-top', imgData.images)
 
   return (
-    <div className="">
+    <div className="gallery">
       <nav className="navbar bg-light">
         <div className="container">
           <a className="navbar-brand" href="/#">
-            <h2>Infinite scroll + image lazy loading</h2>
+            <h2>Infinite scroll and image lazy loading</h2>
           </a>
         </div>
       </nav>
@@ -32,11 +30,11 @@ useInfiniteScroll(bottomBoundaryRef, pageDispatch)
       <div id='images' className="container">
         <div className="row"> 
           {imgData.images.map(({ author, download_url }) => (
-              <ImageCard 
-                key={download_url} 
-                author={author}
-                url={download_url}
-              />
+            <ImageCard 
+              key={download_url} 
+              author={author}
+              url={download_url}
+            />
           ))}            
         </div>
       </div>

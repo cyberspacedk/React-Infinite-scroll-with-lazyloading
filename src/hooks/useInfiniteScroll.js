@@ -6,7 +6,7 @@ export const useInfiniteScroll = (intersectionTarget, dispatch)=> {
   const scrollObserver = useCallback(targetNode => {
     const observerHandler = entries => {
       entries.forEach(entryNode => { 
-        if(entryNode.intersectionRatio > 0) dispatch({type: PAGE_ACTION_TYPES.ADVANCE_PAGE})
+        if(entryNode.isIntersecting) dispatch({type: PAGE_ACTION_TYPES.ADVANCE_PAGE})
       })
     }
     const observer = new IntersectionObserver(observerHandler);
