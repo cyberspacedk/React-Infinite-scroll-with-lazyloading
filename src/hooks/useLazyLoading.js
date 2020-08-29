@@ -3,8 +3,7 @@ import {useEffect, useCallback, useRef} from 'react';
 export const useLazyLoading = (imageSelector, imageItems)=> {
   const lazyLoadObserver = useCallback(intersectionTarget=> {  
     const options = {
-      rootMargin: "100px 0px",
-      threshold: 0.01,
+      rootMargin: "100px 0px", 
     };
 
     const observer =  new IntersectionObserver((entries, localObserver) => {
@@ -28,7 +27,7 @@ export const useLazyLoading = (imageSelector, imageItems)=> {
     const imageNodes = document.querySelectorAll(imageSelector);
     imagesRef.current = imageNodes;
 
-    if(imageNodes) imageNodes.forEach(imageNode => lazyLoadObserver(imageNode)); 
+    if(imagesRef.current) imagesRef.current.forEach(imageNode => lazyLoadObserver(imageNode)); 
   }, [lazyLoadObserver, imagesRef, imageSelector, imageItems]);
 
 }
