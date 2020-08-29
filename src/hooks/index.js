@@ -1,1 +1,2 @@
-export * from './useImagesFetch'
+export * from './useImagesFetch';
+export * from './useInfiniteScroll';

@@ -1,2 +1,2 @@
-export * from './image';
-export * from './page';
+export * from './imageReducer';
+export * from './pageReducer';

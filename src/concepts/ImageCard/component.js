@@ -7,7 +7,8 @@ const ImageCard = ({author, url}) => (
         alt={author}
         data-src={url}
         className="card-img-top"
-        src={'https://picsum.photos/id/870/300/300?grayscale&blur=2'}
+        // src={'https://picsum.photos/id/870/300/300?grayscale&blur=2'}
+        src={url}
       />
     </div>
     <div className="card-footer">

@@ -2,8 +2,8 @@ import React, {useReducer, useRef} from 'react';
 
 import ImageCard from '../ImageCard';
 
-import { imageReducer, imageInitialState} from '../../utils' 
-import {useImagesFetch} from '../../hooks';
+import { imageReducer, imageInitialState, pageReducer, pageInitialState} from '../../utils' 
+import {useImagesFetch, useInfiniteScroll} from '../../hooks';
 
 import '../../index.css';
 
@@ -11,14 +11,13 @@ import '../../index.css';
 
 
 const  App = ()=> {
+const [imgData, imgDispatch]=useReducer(imageReducer, imageInitialState);
+const [pageData, pageDispatch]=useReducer(pageReducer, pageInitialState); 
+const bottomBoundaryRef = useRef()  
 
-const [imgData, imgDispatch]=useReducer(imageReducer, imageInitialState)
 
-
-
-useImagesFetch(0, imgDispatch);
-
-  const bottomBoundaryRef = useRef() 
+useImagesFetch(pageData.page, imgDispatch);
+useInfiniteScroll(bottomBoundaryRef, pageDispatch)
 
   return (
     <div className="">
@@ -42,11 +41,11 @@ useImagesFetch(0, imgDispatch);
         </div>
       </div>
 
-      {/* {imgData.fetching && (
+      {imgData.fetching && (
         <div className="text-center bg-secondary m-auto p-3">
           <p className="m-0 text-white">Getting images</p>
         </div>
-      )} */}
+      )}
       
       <div id='page-bottom-boundary' style={{ border: '1px solid red' }} ref={bottomBoundaryRef} />
     </div>
